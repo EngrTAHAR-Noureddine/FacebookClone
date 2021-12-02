@@ -10,4 +10,6 @@
     <string name="todo">TODO</string>
     <string name="text">Congrat! You are Connected</string>
     <string name="sign_out">Sign Out</string>
+    <string name="emailTxt">Email</string>
+    <string name="passwordtxt">password</string>
 </resources>
