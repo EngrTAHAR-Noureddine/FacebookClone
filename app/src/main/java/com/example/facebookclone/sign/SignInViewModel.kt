@@ -25,8 +25,10 @@ class SignInViewModel(private val binding:SignInFragmentBinding, private val con
         this. pref = this.context?.getSharedPreferences("signIn", Context.MODE_PRIVATE)
         this._email.value = this.pref?.getString("email",null)
         this._password.value = this.pref?.getString("password",null)
-        this.goToSignedPage()
 
+        if(this._email.value!=null && this._password!= null ){
+            this.goToSignedPage()
+        }
 
     }
 
@@ -35,19 +37,23 @@ class SignInViewModel(private val binding:SignInFragmentBinding, private val con
             this.context.findNavController(R.id.myNavHostFragment)?.navigate(R.id.action_signInFragment_to_signedInFragment,this.savedInstanceState)
         }
     }
+    private fun saveData(email:String?, password :String?){
+        val editor : SharedPreferences.Editor? = this.pref?.edit()
+        editor?.apply{
+            putString("email",email)
+            putString("password",password)
+        }?.apply()
+    }
+
 
     fun onClickSignIn(){
-        this._email.value = if(this.binding.emailInput == null) null else this.binding.emailInput.toString()
-        this._password.value = if(this.binding.passwordInput == null) null else this.binding.passwordInput.toString()
+        this._email.value =if(this.binding.emailInput.text.isNotEmpty()) this.binding.emailInput.text.toString() else null
+        this._password.value = if(this.binding.passwordInput.text.isNotEmpty()) this.binding.passwordInput.text.toString() else null
 
         if(this._email.value!=null && this._password!= null ){
-            with (this.pref?.edit()) {
-                this?.putString("email",_email.value.toString())
-                this?.putString("password",_password.value.toString())
-            }
+            saveData(this._email.value,this._password.value)
             this.goToSignedPage()
         }
-
 
     }
 

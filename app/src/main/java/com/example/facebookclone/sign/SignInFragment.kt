@@ -1,6 +1,8 @@
 package com.example.facebookclone.sign
 
 
+import android.content.Context
+import android.content.SharedPreferences
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -31,16 +33,10 @@ class SignInFragment : Fragment() {
         }
 
         this.binding.lifecycleOwner = this
-
-
-
-
-
-
-
-
         return this.binding.root
     }
+
+
 
 
 
