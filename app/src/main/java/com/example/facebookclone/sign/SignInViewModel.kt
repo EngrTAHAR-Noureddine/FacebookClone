@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.SharedPreferences
 import android.os.Bundle
 import androidx.fragment.app.FragmentActivity
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.navigation.findNavController
@@ -14,21 +15,20 @@ class SignInViewModel(private val binding:SignInFragmentBinding, private val con
 
     private var pref : SharedPreferences?
     private var _email = MutableLiveData<String?>()
-    //val email: LiveData<String?>
-      //  get() = _email
+    val email: LiveData<String?>
+        get() = _email
     private var _password = MutableLiveData<String?>()
-    //val password: LiveData<String?>
-      //  get() = _password
+    val password: LiveData<String?>
+        get() = _password
 
 
     init {
         this. pref = this.context?.getSharedPreferences("signIn", Context.MODE_PRIVATE)
         this._email.value = this.pref?.getString("email",null)
         this._password.value = this.pref?.getString("password",null)
-
-        if(this._email.value!=null && this._password!= null ){
+        /*if(this._email.value!=null && this._password.value!= null ){
             this.goToSignedPage()
-        }
+        }*/
 
     }
 

@@ -10,6 +10,15 @@ import androidx.lifecycle.ViewModel
 import androidx.navigation.findNavController
 import com.example.facebookclone.R
 import com.example.facebookclone.databinding.SignedInFragmentBinding
+import androidx.core.content.ContextCompat.startActivity
+
+import com.example.facebookclone.MainActivity
+
+
+
+import android.content.Intent
+
+
 
 class SignedInViewModel(private val binding: SignedInFragmentBinding, private val context : FragmentActivity, private val savedInstanceState: Bundle?) : ViewModel() {
     private var pref : SharedPreferences?
@@ -36,8 +45,11 @@ class SignedInViewModel(private val binding: SignedInFragmentBinding, private va
 
     fun onLogOut(){
         if(this._password.value != null && this._email.value!=null){
-            saveData(this._email.value,this._password.value)
+            saveData(null,null)
             this.context.findNavController(R.id.myNavHostFragment)?.navigate(R.id.action_signedInFragment_to_signInFragment,this.savedInstanceState)
+            //val intent = Intent(this.context,MainActivity::class.java)
+            //this.context.startActivity(intent)
+
         }
     }
 
